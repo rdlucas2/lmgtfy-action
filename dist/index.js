@@ -565,6 +565,11 @@ try {
     console.log(`The event payload: ${payload}`);
     */
 
+    const githubToken = core.getInput('github-token');
+    const config = {
+        headers: { Authorization: `Bearer ${githubToken}` }
+    };
+
     const encodedQuery = encodeURIComponent(github.context.payload.issue.body);
 
     axios
@@ -579,7 +584,7 @@ try {
 
             axios.post(github.context.payload.issue.comments_url, {
                     "body": "Here's a link that can answer your question: " + res.data.short_url
-                })
+                }, config)
                 .then(r => {
                     console.log(`statusCode2: ${r.statusCode}`);
                     console.log(r);
