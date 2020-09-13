@@ -8,4 +8,5 @@ jobs:
   autoRespond:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - uses: rdlucas2/lmgtfy-action@v0.0.1
