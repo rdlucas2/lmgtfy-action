@@ -2,4 +2,4 @@ name: 'Let me google that for you action'
 description: 'Add this action to your repository to auto reply to issues with a let me google that for you link.'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
