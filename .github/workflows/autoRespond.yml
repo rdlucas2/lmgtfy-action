@@ -8,4 +8,4 @@ jobs:
   autoRespond:
     runs-on: ubuntu-latest
     steps:
-      - uses: rdlucas2/lmgtfy-action@v0.0.2
+      - uses: rdlucas2/lmgtfy-action@v0.0.1
