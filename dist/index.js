@@ -574,22 +574,24 @@ try {
             }
         })
         .then(res => {
-            console.log(`statusCode: ${res.statusCode}`);
+            console.log(`statusCode1: ${res.statusCode}`);
             console.log(res);
 
             axios.post(github.context.payload.issue.comments_url, {
-                    "body": "Here's a link that can answer your question: " + res.body.short_url
+                    "body": "Here's a link that can answer your question: " + res.data.short_url
                 })
                 .then(r => {
-                    console.log(`statusCode: ${r.statusCode}`);
+                    console.log(`statusCode2: ${r.statusCode}`);
                     console.log(r);
                 })
                 .catch(e => {
                     console.error(e);
+                    core.setFailed(error.message);
                 });
         })
         .catch(error => {
             console.error(error);
+            core.setFailed(error.message);
         });
 } catch (error) {
     core.setFailed(error.message);
