@@ -9,11 +9,28 @@ try {
     */
 
     const githubToken = core.getInput('github-token');
+    const fieldToQuery = core.getInput('field-to-query');
+
     const config = {
         headers: { Authorization: `Bearer ${githubToken}` }
     };
 
-    const encodedQuery = encodeURIComponent(github.context.payload.issue.body);
+    let encodedQuery = null;
+    switch (fieldToQuery) {
+        case 'body':
+            encodedQuery = encodeURIComponent(github.context.payload.issue.body);
+            break;
+        case 'title':
+            encodedQuery = encodeURIComponent(github.context.payload.issue.title);
+            break;
+        default:
+            core.setFailed('No such field available');
+    }
+
+    if (encodedQuery === null) {
+        core.setFailed('Query is empty');
+        throw "Query is empty";
+    }
 
     axios
         .post('https://api.lmgtfy.com/short_urls', {
